@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="Production-MySQL" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <!-- JDBC драйвер -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <!-- URL для подключения к базе данных -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>
+            <!-- Имя пользователя БД -->
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <!-- Пароль пользователя БД -->
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <!-- Показывать SQL запросы перед выполнением -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!-- Диалект языка SQL -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <!-- Закрывать ли подключение к БД после сеанса работы -->
+            <property name="hibernate.connection.shutdown" value="true"/>
+            <!-- Стратегия, по которой Hibernate меняет схему (стуктуру БД) -->
+            <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Unit-tests-HSQLDB" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <!-- JDBC драйвер -->
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <!-- URL для подключения к базе данных -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:."/>
+            <!-- Имя пользователя БД -->
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <!-- Пароль пользователя БД -->
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <!-- Показывать SQL запросы перед выполнением -->
+            <property name="hibernate.show_sql" value="true"/>
+            <!-- Диалект языка SQL -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <!-- Закрывать ли подключение к БД после сеанса работы -->
+            <property name="hibernate.connection.shutdown" value="true"/>
+            <!--
+            Стратегия, по которой Hibernate меняет схему (стуктуру БД)
+             * validate: validate the schema, makes no changes to the database.
+               При старте проверить схему, если не подходит => завершится с ошибкой
+             * update: update the schema.
+               Добавить / изменить таблицы, столбцы, связи автоматически (используя CREATE / ALTER)
+               Если изменение не удаётся провести => завершаемся с ошибкой
+             * create: creates the schema, destroying previous data.
+               Удаляем предыдущую схему БД, создаём БД заново.
+             * create-drop: drop the schema at the end of the session.
+               Создаём БД заново, в конце снова удаляем.
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Unit-tests-MySQL" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <!-- JDBC драйвер -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <!-- URL для подключения к базе данных -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/saveoursalary_test"/>
+            <!-- Имя пользователя БД -->
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <!-- Пароль пользователя БД -->
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <!-- Показывать SQL запросы перед выполнением -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!-- Диалект языка SQL -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <!-- Закрывать ли подключение к БД после сеанса работы -->
+            <property name="hibernate.connection.shutdown" value="true"/>
+            <!-- Стратегия, по которой Hibernate меняет схему (стуктуру БД) -->
+            <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Unit-tests-Postgres" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <!-- JDBC драйвер -->
+            <property name="javax.persistence.jdbc.driver"
+                      value="org.postgresql.Driver"/>
+            <!-- URL для подключения к базе данных -->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5432/postgres"/>
+            <!-- Имя пользователя БД -->
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <!-- Пароль пользователя БД -->
+            <property name="javax.persistence.jdbc.password" value="123"/>
+            <!-- Показывать SQL запросы перед выполнением -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!-- Диалект языка SQL -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.PostgreSQL94Dialect"/>
+            <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+
