@@ -31,7 +31,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <!-- JDBC драйвер -->
-            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.driver"
+                      value="org.hsqldb.jdbcDriver"/>
             <!-- URL для подключения к базе данных -->
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:."/>
             <!-- Имя пользователя БД -->
@@ -96,7 +97,7 @@
             <!-- Имя пользователя БД -->
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <!-- Пароль пользователя БД -->
-            <property name="javax.persistence.jdbc.password" value="123"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
             <!-- Показывать SQL запросы перед выполнением -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

@@ -8,10 +8,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "`user`")
 @NamedQueries({
-        @NamedQuery(name = User.ALL_USERS, query = "select u from User u"),
-        @NamedQuery(name = User.FIND_BY_LOGIN, query = "select u from User u where u.login = :login")
+        @NamedQuery(name = User.ALL_USERS,
+                query = "select u from User u"),
+        @NamedQuery(name = User.FIND_BY_LOGIN,
+                query = "select u from User u where u.login = :login")
 })
-public class User {
+public class User { // UserInner
     public static final String ALL_USERS = "User.allUsers";
     static final String FIND_BY_LOGIN = "User.findByLogin";
 
@@ -20,7 +22,7 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = false, updatable = false)
+    @Column(name = "USER_ID", insertable = false, updatable = false)
     private int id;
 
     /**

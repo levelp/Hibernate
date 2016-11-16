@@ -7,6 +7,7 @@
     <groupId>java</groupId>
     <artifactId>Hibernate</artifactId>
     <version>1.0</version>
+
     <name>Демонстрация работы с Hibernate</name>
 
     <properties>
@@ -14,6 +15,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java-version>1.8</java-version>
         <mysql-version>5.1.38</mysql-version>
+        <!-- Свойство с вашим названием и вашим значением -->
+        <myProperty>Моё значение</myProperty>
     </properties>
 
     <dependencies>
