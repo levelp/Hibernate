@@ -16,12 +16,13 @@
             <property name="javax.persistence.jdbc.password" value=""/>
             <!-- Показывать SQL запросы перед выполнением -->
             <property name="hibernate.show_sql" value="true"/>
+            <!-- Форматировать SQL-запросы -->
             <property name="hibernate.format_sql" value="true"/>
             <!-- Диалект языка SQL -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <!-- Закрывать ли подключение к БД после сеанса работы -->
             <property name="hibernate.connection.shutdown" value="true"/>
-            <!-- Стратегия, по которой Hibernate меняет схему (стуктуру БД) -->
+            <!-- Стратегия, по которой Hibernate меняет схему (структуру БД) -->
             <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
             <property name="hibernate.hbm2ddl.auto" value="none"/>
         </properties>
@@ -53,7 +54,7 @@
                Добавить / изменить таблицы, столбцы, связи автоматически (используя CREATE / ALTER)
                Если изменение не удаётся провести => завершаемся с ошибкой
              * create: creates the schema, destroying previous data.
-               Удаляем предыдущую схему БД, создаём БД заново.
+               Удаляем предыдущую схему БД (таблицы, связи, данные), создаём БД заново.
              * create-drop: drop the schema at the end of the session.
                Создаём БД заново, в конце снова удаляем.
             -->
