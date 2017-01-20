@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC драйвер -->
+        <property name="javax.persistence.jdbc.driver">org.postgresql.Driver</property>
+        <!-- URL для подключения к базе данных -->
+        <property name="javax.persistence.jdbc.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <!-- Имя пользователя БД -->
+        <property name="javax.persistence.jdbc.user">postgres</property>
+        <!-- Пароль пользователя БД -->
+        <property name="javax.persistence.jdbc.password">123</property>
+        <!-- Показывать SQL запросы перед выполнением -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <!-- Диалект языка SQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+    </session-factory>
+</hibernate-configuration>

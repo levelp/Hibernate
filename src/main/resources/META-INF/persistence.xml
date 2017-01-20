@@ -98,7 +98,7 @@
             <!-- Имя пользователя БД -->
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <!-- Пароль пользователя БД -->
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.password" value="123"/>
             <!-- Показывать SQL запросы перед выполнением -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
@@ -106,7 +106,7 @@
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.PostgreSQL94Dialect"/>
             <!-- create-drop - пересоздание БД, т.к. это модульный тест -->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>

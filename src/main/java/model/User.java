@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Пользователь системы
@@ -16,7 +18,18 @@ import javax.persistence.*;
 public class User { // UserInner
     public static final String ALL_USERS = "User.allUsers";
     static final String FIND_BY_LOGIN = "User.findByLogin";
-
+    // Группа пользователя:
+    //  много пользователей входят в одну группу
+    // FetchType.EAGER - ранняя загрузка
+    // FetchType.LAZY
+    @ManyToOne(targetEntity = Group.class, fetch = FetchType.EAGER)
+    Group group;
+    @ManyToMany(targetEntity = User.class)
+    @JoinTable(
+            name = "friends",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "user_friend_id", referencedColumnName = "USER_ID"))
+    List<User> friends = new ArrayList<>();
     /**
      * id пользователя
      */
@@ -24,7 +37,6 @@ public class User { // UserInner
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", insertable = false, updatable = false)
     private int id;
-
     /**
      * Логин пользователя
      * Должен быть уникальным
@@ -43,4 +55,17 @@ public class User { // UserInner
     public int getId() {
         return id;
     }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
 }

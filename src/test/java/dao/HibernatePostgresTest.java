@@ -1,5 +1,6 @@
 package dao;
 
+import model.Group;
 import model.User;
 import model.UserAlreadyExistsException;
 import org.junit.AfterClass;
@@ -55,6 +56,52 @@ public class HibernatePostgresTest extends Assert {
         } finally {
             em.getTransaction().commit();
         }
+    }
+
+    @Test
+    public void testCreateUsersAndGroups() throws Exception {
+        em.getTransaction().begin();
+        try {
+            // Создадим несколько групп
+            Group admins = new Group("Admins");
+            em.persist(admins);
+            Group users = new Group("Users");
+            em.persist(users);
+
+            for (int i = 1; i <= 9; i++) {
+                User user = findOrCreate("user" + i);
+                user.setGroup(users);
+                em.persist(user);
+            }
+
+            User superadmin = findOrCreate("superadmin");
+            superadmin.setGroup(admins);
+            em.persist(superadmin);
+
+            for (int i = 1; i <= 3; i++) {
+                User user = findOrCreate("admin" + i);
+                user.setGroup(admins);
+
+                superadmin.getFriends().add(user);
+                user.getFriends().add(superadmin);
+
+                em.persist(user);
+            }
+            em.persist(superadmin);
+
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    private User findOrCreate(String login) {
+        User user = findByLogin(login);
+        if (user == null) {
+            user = new User();
+            user.setLogin(login);
+        }
+        return user;
     }
 
     /**
