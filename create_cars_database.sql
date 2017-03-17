@@ -3,15 +3,45 @@
 --
 SET NAMES 'utf8';
 
---
+-- Удаляем базу данных если она есть
+DROP DATABASE IF EXISTS cars;
+
+-- И создаём её заново
+CREATE DATABASE cars;
+
 -- Установка базы данных по умолчанию
---
 USE cars;
+
+CREATE TABLE vendor (
+  id   INT(11)     NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+)
+  ENGINE = INNODB
+  AUTO_INCREMENT = 4
+  AVG_ROW_LENGTH = 5461
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
+
+CREATE TABLE model (
+  id        INT(11)      NOT NULL AUTO_INCREMENT,
+  name      VARCHAR(255) NOT NULL,
+  vendor_id INT(11)      NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT FK_model_vendor_id FOREIGN KEY (vendor_id)
+  REFERENCES vendor (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+  ENGINE = INNODB
+  AUTO_INCREMENT = 4
+  AVG_ROW_LENGTH = 5461
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
 
 --
 -- Описание для таблицы car
 --
-DROP TABLE IF EXISTS car;
 CREATE TABLE car (
   id       INT(11)      NOT NULL AUTO_INCREMENT,
   number   VARCHAR(255) NOT NULL,
@@ -28,10 +58,20 @@ CREATE TABLE car (
   CHARACTER SET utf8
   COLLATE utf8_general_ci;
 
+CREATE TABLE service (
+  id   INT(11) NOT NULL AUTO_INCREMENT,
+  name TEXT    NOT NULL,
+  PRIMARY KEY (id)
+)
+  ENGINE = INNODB
+  AUTO_INCREMENT = 3
+  AVG_ROW_LENGTH = 8192
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
+
 --
 -- Описание для таблицы car_service
 --
-DROP TABLE IF EXISTS car_service;
 CREATE TABLE car_service (
   car_id     INT(11) DEFAULT NULL,
   service_id INT(11) DEFAULT NULL,
@@ -50,91 +90,29 @@ CREATE TABLE car_service (
   COLLATE utf8_general_ci;
 
 --
--- Описание для таблицы model
---
-DROP TABLE IF EXISTS model;
-CREATE TABLE model (
-  id        INT(11)      NOT NULL AUTO_INCREMENT,
-  name      VARCHAR(255) NOT NULL,
-  vendor_id INT(11)      NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT FK_model_vendor_id FOREIGN KEY (vendor_id)
-  REFERENCES vendor (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
-  ENGINE = INNODB
-  AUTO_INCREMENT = 4
-  AVG_ROW_LENGTH = 5461
-  CHARACTER SET utf8
-  COLLATE utf8_general_ci;
-
---
--- Описание для таблицы service
---
-DROP TABLE IF EXISTS service;
-CREATE TABLE service (
-  id   INT(11) NOT NULL AUTO_INCREMENT,
-  name TEXT    NOT NULL,
-  PRIMARY KEY (id)
-)
-  ENGINE = INNODB
-  AUTO_INCREMENT = 3
-  AVG_ROW_LENGTH = 8192
-  CHARACTER SET utf8
-  COLLATE utf8_general_ci;
-
---
--- Описание для таблицы vendor
---
-DROP TABLE IF EXISTS vendor;
-CREATE TABLE vendor (
-  id   INT(11)     NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NOT NULL,
-  PRIMARY KEY (id)
-)
-  ENGINE = INNODB
-  AUTO_INCREMENT = 4
-  AVG_ROW_LENGTH = 5461
-  CHARACTER SET utf8
-  COLLATE utf8_general_ci;
-
---
--- Вывод данных для таблицы car
---
-INSERT INTO car VALUES
-  (1, '345432', 1),
-  (3, '33543253', 2),
-  (4, '122312', 3);
-
---
--- Вывод данных для таблицы car_service
---
-INSERT INTO car_service VALUES
-  (1, 1),
-  (1, 1),
-  (3, 1),
-  (3, 2);
-
---
--- Вывод данных для таблицы model
---
-INSERT INTO model VALUES
-  (1, 'X5', 1),
-  (2, 'X4', 1),
-  (3, 'X6', 1);
-
---
--- Вывод данных для таблицы service
---
-INSERT INTO service VALUES
-  (1, 'Сервис 1'),
-  (2, 'Сервис 2');
-
---
 -- Вывод данных для таблицы vendor
 --
 INSERT INTO vendor VALUES
   (1, 'BMW'),
   (2, 'Lada'),
   (3, 'General Motors');
+
+INSERT INTO model VALUES
+  (1, 'X5', 1),
+  (2, 'X4', 1),
+  (3, 'X6', 1);
+
+INSERT INTO car VALUES
+  (1, '345432', 1),
+  (3, '33543253', 2),
+  (4, '122312', 3);
+
+INSERT INTO service VALUES
+  (1, 'Сервис 1'),
+  (2, 'Сервис 2');
+
+INSERT INTO car_service VALUES
+  (1, 1),
+  (1, 1),
+  (3, 1),
+  (3, 2);
