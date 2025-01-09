@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java-version>1.8</java-version>
-        <mysql-version>5.1.38</mysql-version>
+        <mysql-version>5.1.49</mysql-version>
         <!-- Свойство с вашим названием и вашим значением -->
         <myProperty>Моё значение</myProperty>
     </properties>
