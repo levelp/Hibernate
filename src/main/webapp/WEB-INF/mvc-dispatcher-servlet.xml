@@ -1,0 +1,25 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Сканировать аннотации -->
+    <context:component-scan base-package="controllers"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- Перед названием страницы добавляется prefix -->
+        <property name="prefix" value="/pages/"/>
+        <!-- После названия страницы добавляется suffix -->
+        <property name="suffix" value=".jsp"/>
+
+        <property name="contentType" value="text/html; charset=utf-8"/>
+    </bean>
+
+    <mvc:resources mapping="/res/**" location="/res/"/>
+    <mvc:annotation-driven/>
+</beans>
